@@ -46,7 +46,7 @@ const ListIndex = () => {
         )}
         <div className="tasks_list__title_spacer"></div>
         <Link to={`/lists/${listId}/edit`}>
-          <Button label = "Edit..."/>
+          <Button label="Edit..." />
         </Link>
       </div>
       <div className="tasks_list__items">

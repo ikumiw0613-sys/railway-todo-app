@@ -54,7 +54,7 @@ const SignIn = () => {
             autoComplete="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            />
+          />
         </fieldset>
         <fieldset className="signin__form_field">
           <label htmlFor={`${id}-password`} className="signin__form_label">
@@ -66,15 +66,14 @@ const SignIn = () => {
             autoComplete="current-password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            />
+          />
         </fieldset>
         <div className="signin__form_actions">
           <Link className="app_button" data-variant="secondary" to="/signup">
             Register
           </Link>
           <div className="signin__form_actions_spacer"></div>
-          <Button label = "Login" type = "submit"  disabled ={isSubmitting} 
-          />
+          <Button label="Login" type="submit" disabled={isSubmitting} />
         </div>
       </form>
     </main>

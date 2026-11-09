@@ -89,7 +89,7 @@ const EditList = () => {
             placeholder="Family"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            />
+          />
         </fieldset>
         <div className="edit_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">
@@ -98,15 +98,16 @@ const EditList = () => {
           <div className="edit_list__form_actions_spacer"></div>
           <Button
             type="button"
-            label = "Delete"
+            label="Delete"
             className="app_button edit_list__form_actions_delete"
             disabled={isSubmitting}
             onClick={handleDelete}
           />
-          <Button type="submit"
-          label = "Update"
-          className="app_button"
-          disabled={isSubmitting}
+          <Button
+            type="submit"
+            label="Update"
+            className="app_button"
+            disabled={isSubmitting}
           />
         </div>
       </form>

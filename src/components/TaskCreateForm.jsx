@@ -116,14 +116,15 @@ export const TaskCreateForm = () => {
           )}
         </Button>
 
-        <Input className="task_create_from__title"
+        <Input
+          className="task_create_from__title"
           placeholder="Add a new task..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          disabled={formState==="submitting"}
-          />
+          disabled={formState === "submitting"}
+        />
       </div>
       {formState !== "initial" && (
         <div>
@@ -140,17 +141,17 @@ export const TaskCreateForm = () => {
           <div className="task_create_form__actions">
             <Button
               type="button"
-              label = "Discard"
+              label="Discard"
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
               disabled={(!title && !detail) || formState === "submitting"}
             />
-            
+
             <div className="task_create_form__spacer"></div>
             <Button
               type="submit"
-              label = "Add"
+              label="Add"
               onBlur={handleBlur}
               disabled={!title || !detail || formState === "submitting"}
             />

@@ -93,7 +93,7 @@ const SignUp = () => {
             Login
           </Link>
           <div className="signup__form_actions_spacer"></div>
-          <Button label="Register" type = "submit"  disabled={isSubmitting}/>
+          <Button label="Register" type="submit" disabled={isSubmitting} />
         </div>
       </form>
     </main>

@@ -56,18 +56,14 @@ const NewList = () => {
             placeholder="Family"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            />
+          />
         </fieldset>
         <div className="new_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">
             Cancel
           </Link>
           <div className="new_list__form_actions_spacer"></div>
-          <Button type="submit" 
-          label = "Create" 
-          disabled={isSubmitting}
-          />
-
+          <Button type="submit" label="Create" disabled={isSubmitting} />
         </div>
       </form>
     </main>
