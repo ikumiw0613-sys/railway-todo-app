@@ -6,6 +6,7 @@ import "./index.css";
 import { setCurrentList } from "~/store/list";
 import { fetchTasks, updateTask, deleteTask } from "~/store/task";
 import { useId } from "~/hooks/useId";
+import { Input } from "~/components/Input";
 
 const EditTask = () => {
   const id = useId();
@@ -89,13 +90,12 @@ const EditTask = () => {
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
             Title
           </label>
-          <input
+          <Input
             id={`${id}-title`}
-            className="app_input"
             placeholder="Buy some milk"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-          />
+            />
         </fieldset>
         <fieldset className="edit_list__form_field">
           <label htmlFor={`${id}-detail`} className="edit_list__form_label">
@@ -114,12 +114,12 @@ const EditTask = () => {
             Is Done
           </label>
           <div>
-            <input
+            <Input
               id={`${id}-done`}
               type="checkbox"
               checked={done}
               onChange={(event) => setDone(event.target.checked)}
-            />
+              /> 
           </div>
         </fieldset>
         <div className="edit_list__form_actions">
@@ -127,17 +127,19 @@ const EditTask = () => {
             Cancel
           </Link>
           <div className="edit_list__form_actions_spacer"></div>
-          <button
+          <Button
             type="button"
+            label = "Delete"
             className="app_button edit_list__form_actions_delete"
             disabled={isSubmitting}
             onClick={handleDelete}
-          >
-            Delete
-          </button>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
-            Update
-          </button>
+          />
+          <Button type="submit"
+          label = "Update"
+          className="app_button"
+          disabled={isSubmitting}
+          />
+
         </div>
       </form>
     </main>

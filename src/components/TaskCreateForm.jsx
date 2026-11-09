@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import "./TaskCreateForm.css";
 import { CheckIcon } from "~/icons/CheckIcon";
 import { createTask } from "~/store/task";
+import { Button } from "./Button";
+import { Input } from "./Input";
 
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
@@ -93,8 +95,7 @@ export const TaskCreateForm = () => {
       data-state={formState}
     >
       <div className="task_create_form__title_container">
-        <button
-          type="button"
+        <Button
           onClick={handleToggle}
           className="task_create_form__mark_button"
           onFocus={handleFocus}
@@ -113,17 +114,16 @@ export const TaskCreateForm = () => {
               aria-label="Incomplete"
             ></div>
           )}
-        </button>
-        <input
-          type="text"
-          className="task_create_form__title"
+        </Button>
+
+        <Input className="task_create_from__title"
           placeholder="Add a new task..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          disabled={formState === "submitting"}
-        />
+          disabled={formState==="submitting"}
+          />
       </div>
       {formState !== "initial" && (
         <div>
@@ -138,25 +138,22 @@ export const TaskCreateForm = () => {
             disabled={formState === "submitting"}
           />
           <div className="task_create_form__actions">
-            <button
+            <Button
               type="button"
-              className="app_button"
+              label = "Discard"
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
               disabled={(!title && !detail) || formState === "submitting"}
-            >
-              Discard
-            </button>
+            />
+            
             <div className="task_create_form__spacer"></div>
-            <button
+            <Button
               type="submit"
-              className="app_button"
+              label = "Add"
               onBlur={handleBlur}
               disabled={!title || !detail || formState === "submitting"}
-            >
-              Add
-            </button>
+            />
           </div>
         </div>
       )}

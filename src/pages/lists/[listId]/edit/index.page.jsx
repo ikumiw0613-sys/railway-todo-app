@@ -5,6 +5,7 @@ import { BackButton } from "~/components/BackButton";
 import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
+import { Input } from "~/components/Input";
 
 const EditList = () => {
   const id = useId();
@@ -83,30 +84,30 @@ const EditList = () => {
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
             Name
           </label>
-          <input
+          <Input
             id={`${id}-title`}
-            className="app_input"
             placeholder="Family"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-          />
+            />
         </fieldset>
         <div className="edit_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">
             Cancel
           </Link>
           <div className="edit_list__form_actions_spacer"></div>
-          <button
+          <Button
             type="button"
+            label = "Delete"
             className="app_button edit_list__form_actions_delete"
             disabled={isSubmitting}
             onClick={handleDelete}
-          >
-            Delete
-          </button>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
-            Update
-          </button>
+          />
+          <Button type="submit"
+          label = "Update"
+          className="app_button"
+          disabled={isSubmitting}
+          />
         </div>
       </form>
     </main>

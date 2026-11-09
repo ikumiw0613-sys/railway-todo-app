@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import "./index.css";
 import { useSignup } from "~/hooks/useSignup";
 import { useId } from "~/hooks/useId";
+import { Button } from "~/components/Button";
+import { isUISelectionStart } from "@testing-library/user-event/dist/cjs/document/UI.js";
+import { Input } from "~/components/Input";
 
 const SignUp = () => {
   const auth = useSelector((state) => state.auth.token !== null);
@@ -48,10 +51,9 @@ const SignUp = () => {
           <label htmlFor={`${id}-email`} className="signup__form_label">
             E-mail Address
           </label>
-          <input
+          <Input
             id={`${id}-email`}
             autoComplete="email"
-            className="app_input"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -64,10 +66,9 @@ const SignUp = () => {
           >
             Name
           </label>
-          <input
+          <Input
             id={`${id}-name`}
             type="text"
-            className="app_input"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
@@ -80,10 +81,9 @@ const SignUp = () => {
           >
             Password
           </label>
-          <input
+          <Input
             id={`${id}-password`}
             type="password"
-            className="app_input"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
@@ -93,9 +93,7 @@ const SignUp = () => {
             Login
           </Link>
           <div className="signup__form_actions_spacer"></div>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
-            Register
-          </button>
+          <Button label="Register" type = "submit"  disabled={isSubmitting}/>
         </div>
       </form>
     </main>
