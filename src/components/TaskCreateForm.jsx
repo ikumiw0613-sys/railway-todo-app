@@ -6,6 +6,7 @@ import { createTask } from "~/store/task";
 import { Button } from "./Button";
 import { Input } from "./Input";
 
+
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
 
@@ -16,6 +17,7 @@ export const TaskCreateForm = () => {
 
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
+  const [limit, setLimit] = useState("");
   const [done, setDone] = useState(false);
 
   const handleToggle = useCallback(() => {
@@ -41,11 +43,12 @@ export const TaskCreateForm = () => {
       setFormState("initial");
       setDone(false);
     }, 100);
-  }, [title, detail]);
+  }, [title, detail, limit]);
 
   const handleDiscard = useCallback(() => {
     setTitle("");
     setDetail("");
+    setLimit("");
     setFormState("initial");
     setDone(false);
   }, []);
@@ -55,8 +58,13 @@ export const TaskCreateForm = () => {
       event.preventDefault();
 
       setFormState("submitting");
+      console.log(limit);
+      const formattedLimit = limit
+        ? new Date(limit).toISOString().replace(".000Z", "Z")
+        : null;
+      console.log(formattedLimit);
 
-      void dispatch(createTask({ title, detail, done }))
+      void dispatch(createTask({ title, detail, done, limit: formattedLimit }))
         .unwrap()
         .then(() => {
           handleDiscard();
@@ -66,7 +74,7 @@ export const TaskCreateForm = () => {
           setFormState("focused");
         });
     },
-    [title, detail, done],
+    [title, detail, limit, done],
   );
 
   useEffect(() => {
@@ -138,6 +146,14 @@ export const TaskCreateForm = () => {
             onBlur={handleBlur}
             disabled={formState === "submitting"}
           />
+          <Input
+            type="datetime-local"
+            onChange={(e) => setLimit(e.target.value)}
+            value={limit}
+            onBlur={handleBlur}
+            disabled={formState === "submitting"}
+          />
+
           <div className="task_create_form__actions">
             <Button
               type="button"

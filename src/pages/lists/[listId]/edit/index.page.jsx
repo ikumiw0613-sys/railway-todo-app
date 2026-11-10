@@ -6,6 +6,7 @@ import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
 import { Input } from "~/components/Input";
+import { Button } from "~/components/Button";
 
 const EditList = () => {
   const id = useId();
