@@ -9,10 +9,9 @@ import { useId } from "~/hooks/useId";
 import { Input } from "~/components/Input";
 import { Button } from "~/components/Button";
 
-const EditTask = () => {
+const EditTask = ({ listId, taskId, handleCloseModal }) => {
   const id = useId();
 
-  const { listId, taskId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -34,9 +33,8 @@ const EditTask = () => {
       setDetail(task.detail);
       setDone(task.done);
       if (task.limit) {
-
         const date = new Date(task.limit);
-        const pad = (value) => String(value).padStart(2, "0")
+        const pad = (value) => String(value).padStart(2, "0");
 
         setLimit(
           `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
@@ -63,9 +61,12 @@ const EditTask = () => {
         ? new Date(limit).toISOString().replace(".000Z", "Z")
         : null;
 
-      void dispatch(updateTask({ id: taskId, title, detail, done, limit: formattedLimit }))
+      void dispatch(
+        updateTask({ id: taskId, title, detail, done, limit: formattedLimit }),
+      )
         .unwrap()
         .then(() => {
+          handleCloseModal();
           history.push(`/lists/${listId}`);
         })
         .catch((err) => {
@@ -75,7 +76,7 @@ const EditTask = () => {
           setIsSubmitting(false);
         });
     },
-    [title, taskId, listId, detail, done, limit],
+    [title, taskId, listId, detail, done, limit, handleCloseModal],
   );
 
   const handleDelete = useCallback(() => {
@@ -88,6 +89,7 @@ const EditTask = () => {
     void dispatch(deleteTask({ id: taskId }))
       .unwrap()
       .then(() => {
+        handleCloseModal();
         history.push(`/`);
       })
       .catch((err) => {
@@ -96,11 +98,13 @@ const EditTask = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
-  }, [taskId]);
+  }, [taskId, handleCloseModal]);
 
   return (
     <main className="edit_list">
-      <BackButton />
+            <button type="button" onClick={handleCloseModal}>
+        Back
+      </button>
       <h2 className="edit_list__title">Edit List</h2>
       <p className="edit_list__error">{errorMessage}</p>
       <form className="edit_list__form" onSubmit={onSubmit}>
@@ -156,9 +160,10 @@ const EditTask = () => {
           </div>
         </fieldset>
         <div className="edit_list__form_actions">
-          <Link to="/" data-variant="secondary" className="app_button">
+          <button type="button" onClick={handleCloseModal}>
             Cancel
-          </Link>
+          </button>
+
           <div className="edit_list__form_actions_spacer"></div>
           <Button
             type="button"

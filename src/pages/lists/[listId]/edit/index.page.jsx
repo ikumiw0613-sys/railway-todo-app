@@ -8,7 +8,7 @@ import { useId } from "~/hooks/useId";
 import { Input } from "~/components/Input";
 import { Button } from "~/components/Button";
 
-const EditList = () => {
+const EditList = ({ handleCloseModal }) => {
   const id = useId();
 
   const { listId } = useParams();
@@ -43,6 +43,7 @@ const EditList = () => {
       void dispatch(updateList({ id: listId, title }))
         .unwrap()
         .then(() => {
+          handleCloseModal();
           history.push(`/lists/${listId}`);
         })
         .catch((err) => {
@@ -52,7 +53,7 @@ const EditList = () => {
           setIsSubmitting(false);
         });
     },
-    [title, listId],
+    [title, listId, handleCloseModal],
   );
 
   const handleDelete = useCallback(() => {
@@ -65,6 +66,7 @@ const EditList = () => {
     void dispatch(deleteList({ id: listId }))
       .unwrap()
       .then(() => {
+        handleCloseModal();
         history.push(`/`);
       })
       .catch((err) => {
@@ -73,11 +75,11 @@ const EditList = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
-  }, []);
+  }, [handleCloseModal]);
 
   return (
     <main className="edit_list">
-      <BackButton />
+
       <h2 className="edit_list__title">Edit List</h2>
       <p className="edit_list__error">{errorMessage}</p>
       <form className="edit_list__form" onSubmit={onSubmit}>
@@ -93,10 +95,11 @@ const EditList = () => {
           />
         </fieldset>
         <div className="edit_list__form_actions">
-          <Link to="/" data-variant="secondary" className="app_button">
-            Cancel
-          </Link>
+          <button type="button" onClick={handleCloseModal}>
+  Cancel
+</button>
           <div className="edit_list__form_actions_spacer"></div>
+          
           <Button
             type="button"
             label="Delete"
@@ -110,6 +113,7 @@ const EditList = () => {
             className="app_button"
             disabled={isSubmitting}
           />
+
         </div>
       </form>
     </main>

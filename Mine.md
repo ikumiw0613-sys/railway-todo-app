@@ -7,16 +7,16 @@
 - Scriptを設定することでnpm run　名前　　を呼び出すことができる
 - コンポーネント化するにはファイルを分ける
 - 共通の設定を切り出してコードの重複を防ぐ
-- ...propsの役割は、個別に取り出さなかった残りのpropsを実際のHTML要素として渡せる
+- ...propsの役割は、個別に取り出さなかった残りのpropsを実際のHTML要素として渡せる　<input {...props} />
 - index.jsで送るデータを決めていたのでlimitを追加した
 - 受け取る形式を把握してその通りにすることが大事
-- YYYY-MM-DDTHH:MM:SSZの方式で時刻を受け取るにはdatetime-localにする
+- YYYY-MM-DDTHH:MM:SSの方式で時刻を受け取るにはdatetime-localにする
 - toLocaleDateStringで現在時刻をYYYY-MM-DD形式に変換できる
 - DateでYYYY-MM-DD形式の文字列をDate型に変換できる
 - getTime()で1970年1月1日からの経過ミリ秒を取得できる
 - UTC形式は日本時間に直す必要がある
-- 
-- 
-- 
+- numericは年を数字で表示する
+- 2-digitは2桁で表示する
+- useMemoは計算結果をメモ化して、再計算をスキップできるReactフック
 - 
 

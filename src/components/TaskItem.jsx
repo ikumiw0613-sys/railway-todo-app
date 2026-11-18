@@ -6,6 +6,7 @@ import { CheckIcon } from "~/icons/CheckIcon";
 import { updateTask } from "~/store/task";
 import "./TaskItem.css";
 import { Button } from "./Button";
+import TaskEditModal from "./TaskEditModal";
 
 const formatLimit = (limit) => {
   if (!limit) return "";
@@ -62,6 +63,11 @@ export const TaskItem = ({ task }) => {
     });
   }, [id, done]);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  }
+
 
   const formattedLimit = useMemo(() => formatLimit(limit), [limit]);
 
@@ -95,12 +101,15 @@ export const TaskItem = ({ task }) => {
         <div className="task_item_limit">{formattedLimit}</div>
 
         <div aria-hidden className="task_item__title_spacer"></div>
-        <Link
-          to={`/lists/${listId}/tasks/${id}`}
-          className="task_item__title_action"
-        >
-          <PencilIcon aria-label="Edit" />
-        </Link>
+
+          <TaskEditModal isOpen={isOpen}
+         handleCloseModal={handleCloseModal}
+         listId={listId}
+         taskId={id}
+         back="Cancel"
+         />
+         <button onClick={() => setIsOpen(true)}>Edit</button>
+
       </div>
       <div className="task_item__detail">{detail}</div>
       <div className="task_item__limit">

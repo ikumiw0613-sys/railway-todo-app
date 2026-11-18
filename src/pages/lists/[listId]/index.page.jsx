@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { TaskItem } from "~/components/TaskItem";
@@ -7,6 +7,8 @@ import { setCurrentList } from "~/store/list";
 import { fetchTasks } from "~/store/task";
 import "./index.css";
 import { Button } from "~/components/Button";
+import ListEditModal from "~/components/ListEditModal";
+
 
 const ListIndex = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,10 @@ const ListIndex = () => {
   const incompleteTasksCount = useSelector((state) => {
     return state.task.tasks?.filter((task) => !task.done).length;
   });
-
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  }
   useEffect(() => {
     dispatch(setCurrentList(listId));
     dispatch(fetchTasks()).unwrap();
@@ -45,9 +50,16 @@ const ListIndex = () => {
           </span>
         )}
         <div className="tasks_list__title_spacer"></div>
-        <Link to={`/lists/${listId}/edit`}>
-          <Button label="Edit..." />
-        </Link>
+        <div>
+          <ListEditModal
+           isOpen={isOpen} 
+           handleCloseModal={handleCloseModal}            
+            />
+          <button onClick={() => setIsOpen(true)}>Edit...</button>
+    
+
+          
+        </div>
       </div>
       <div className="tasks_list__items">
         <TaskCreateForm />
