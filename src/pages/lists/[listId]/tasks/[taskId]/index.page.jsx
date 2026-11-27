@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { BackButton } from "~/components/BackButton";
 import "./index.css";
 import { setCurrentList } from "~/store/list";
 import { fetchTasks, updateTask, deleteTask } from "~/store/task";
@@ -102,11 +101,8 @@ const EditTask = ({ listId, taskId, handleCloseModal }) => {
 
   return (
     <main className="edit_list">
-            <button type="button" onClick={handleCloseModal}>
-        Back
-      </button>
-      <h2 className="edit_list__title">Edit List</h2>
-      <p className="edit_list__error">{errorMessage}</p>
+      <h2 id="task-modal-title" className="edit_list__title">Edit List</h2>
+      <p id="task-modal-description" className="edit_list__error">{errorMessage}</p>
       <form className="edit_list__form" onSubmit={onSubmit}>
         <fieldset className="edit_list__form_field">
           <label htmlFor={`${id}-title`} className="edit_list__form_label">

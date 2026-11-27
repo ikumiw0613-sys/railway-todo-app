@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { BackButton } from "~/components/BackButton";
 import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
@@ -79,9 +78,8 @@ const EditList = ({ handleCloseModal }) => {
 
   return (
     <main className="edit_list">
-
-      <h2 className="edit_list__title">Edit List</h2>
-      <p className="edit_list__error">{errorMessage}</p>
+      <h2 id="modal-header" className="edit_list__title">Edit List</h2>
+      <p id="modal-body" className="edit_list__error">{errorMessage}</p>
       <form className="edit_list__form" onSubmit={onSubmit}>
         <fieldset className="edit_list__form_field">
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
@@ -96,10 +94,10 @@ const EditList = ({ handleCloseModal }) => {
         </fieldset>
         <div className="edit_list__form_actions">
           <button type="button" onClick={handleCloseModal}>
-  Cancel
-</button>
+            Cancel
+          </button>
           <div className="edit_list__form_actions_spacer"></div>
-          
+
           <Button
             type="button"
             label="Delete"
@@ -107,13 +105,13 @@ const EditList = ({ handleCloseModal }) => {
             disabled={isSubmitting}
             onClick={handleDelete}
           />
+
           <Button
             type="submit"
             label="Update"
             className="app_button"
             disabled={isSubmitting}
           />
-
         </div>
       </form>
     </main>
